@@ -1,0 +1,95 @@
+
+
+
+
+/*搜索查询*/
+.searchAndShow {
+  min-height: 730px;
+  height: 100vh;
+  width: 70%;
+  //background-color: rgba(255, 209, 237, 0.6);
+  float: left;
+  font-size: 14px;
+  background-color: #F0F2F5;
+  .seAndSh-dataFromBackend{
+    height:100px;
+    width: 100%;
+    background-color: #fff;
+    //background-color: rgba(182, 167, 237, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items:center;
+  };
+  .seAndSh-filterInFront{
+    height:50px;
+    width: 100%;
+    background-color: #fff;
+    //background-color: rgba(160, 227, 144, 0.3);
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+    padding:0 20px;
+  }
+  .seAndSh-dataList{
+    min-height:580px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    .seAndSh-dataList-box{
+      width:96%;
+      background-color: #fff;
+      height:580px;
+      margin-top: 20px;
+      overflow: auto;
+      .seAndSh-dataList-item{
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        margin:20px auto;
+        .seAndSh-dataList-item-title{
+          height:36px;
+          width:80%;
+          background-color: rgba(240, 242, 245, 0.9);
+          border-top-right-radius: 5px;
+          .seAndSh-dataList-item-img{
+            width:36px;
+            height: 36px;
+            overflow: hidden;
+            border-radius: 3px;
+            float: left;
+            margin-right: 20px;
+          }
+          .seAndSh-dataList-item-p{
+            float: left;
+            text-align: left;
+            height:36px;
+            line-height:36px;
+            font-weight: 700;
+            overflow: hidden;
+          }
+        }
+        .seAndSh-dataList-item-content{
+          background-color:rgba(205,233,255,0.5);
+          min-height:36px;
+          width:80%;
+          text-align: left;
+          padding:10px;
+        }
+      }
+
+    }
+  }
+}
+
+/*实时动态更新图表*/
+
+.realTimeCharts{
+  min-height:730px;
+  height:100vh;
+  width:30%;
+  float: left;
+  border-left: 1px solid #E9EAEC;
+}
