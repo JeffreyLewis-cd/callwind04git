@@ -4,10 +4,9 @@
   <div class="searchAndShow">
     <!--从后台获取数据-->
     <div class="seAndSh-dataFromBackend">
-      <img src="../../assets/img/cinghoo01.png" style="margin-right: 60px;">
+      <img src="../../assets/img/logo_vueUI_jf-02.png" style="margin-right: 60px;height: 100px;">
       <img src="../../assets/img/zf.png" style="height: 36px;margin-right: 20px">
-      <Input v-model="searchVal" style="width:40%">
-
+      <Input v-model="searchVal" style="width:40%" @keyup.native="enterSearch($event)">
       <span slot="prepend">征风山寨版</span>
       <Button slot="append" icon="search" @click.native="searchInMockPool"></Button>
       </Input>
@@ -58,10 +57,10 @@
         hacker: '黑客常用手段',
         mockData: [
           {
-            name: "66",
-            date: "6666",
-            content: "66",
-            address: "666",
+            name: "模拟姓名",
+            date: "模拟日期",
+            content: "模拟内容",
+            address: "模拟地址",
             imgURL: ""
           }
         ],
@@ -69,16 +68,17 @@
     },
     mounted: function () {
       this.getMockData();
+
     },
     components: {},
     methods: {
       //生成模拟数据
       getMockData(){
-        console.log("点击搜索-01");
+//        console.log("点击搜索-01");
         var Mock = require('mockjs');
         var Random = Mock.Random;
         let randomMockData = Mock.mock({
-          'tableData|10': [{
+          'tableData|500': [{
             name: ()=>Random.cname(),
             address: ()=>Random.county(true),
             date: ()=>Random.date(),
@@ -87,8 +87,8 @@
           }]
         });
         this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData)
-        console.log("mutations测试-01");
-        console.log(this.originMockData);
+//        console.log("mutations测试-01");
+//        console.log(this.originMockData);
       },
 
       //查询搜索
@@ -126,8 +126,16 @@
           }
         }
         this.$set(this.$data, "mockData", searchedData);
-        console.log(this.originMockData);
-        console.log(mockDataPoolTemp);
+//        console.log(this.originMockData);
+//        console.log(mockDataPoolTemp);
+      },
+
+      //回车键搜索
+      enterSearch(event){
+//        console.log("键盘事件-01");
+        if(13===event.keyCode){
+          this.searchInMockPool();//查询搜索
+        }
       }
     },
     computed:{
