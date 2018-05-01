@@ -13,13 +13,11 @@
       </Input>
     </div>
 
-    <!--查询结果中过滤-->
+    <!--查询结果列表项数目-->
     <div class="seAndSh-filterInFront">
-      <span>查询结果中过滤：</span>
-      <RadioGroup v-model="hacker">
-        <Radio label="黑客常用手段"></Radio>
-        <Radio label="黑客攻击的方法"></Radio>
-      </RadioGroup>
+      <span>查询到&nbsp; </span>
+      <span>{{mockData.length}}</span>
+      <span> &nbsp;条数据</span>
     </div>
 
     <!-- 展示数据列表-->
@@ -79,7 +77,7 @@
         var Mock = require('mockjs');
         var Random = Mock.Random;
         let randomMockData = Mock.mock({
-          'tableData|500': [{
+          'tableData|10': [{
             name: ()=>Random.cname(),
             address: ()=>Random.county(true),
             date: ()=>Random.date(),
@@ -87,24 +85,22 @@
             imgURL: ()=>Random.image(),
           }]
         });
-        this.$set(this.$data, "mockDataPool", randomMockData.tableData)
+        this.$set(this.$data, "mockDataPool", randomMockData.tableData);
       },
 
       //查询搜索
       searchInMockPool(){
-//        let searchVal=this.searchVal;
         let searchedData = [];
-        for (let key = 0; key < this.mockDataPool.length; key++) {
-          let mockData = this.mockDataPool[key];
+        let mockDataPoolTemp=this.mockDataPool;
+
+        for (let key = 0; key < mockDataPoolTemp.length; key++) {
+          let mockData = mockDataPoolTemp[key];
           let nameIndex = mockData.name.indexOf(this.searchVal);
           let addressIndex = mockData.address.indexOf(this.searchVal);
           let dateIndex = mockData.date.indexOf(this.searchVal);
           let contentIndex = mockData.content.indexOf(this.searchVal);
 
-          let matchResult = (-1 !== nameIndex) ||
-            (-1 !== addressIndex) ||
-            (-1 !== dateIndex) ||
-            (-1 !== contentIndex);
+          let matchResult = (-1 !== nameIndex) ||   (-1 !== addressIndex) ||    (-1 !== dateIndex) ||    (-1 !== contentIndex);
           if (matchResult) {
             /*关键字高亮显示*/
             let newEle = "<span style='color:#fff;background-color:red'>" + this.searchVal + "</span>";
@@ -121,13 +117,14 @@
             else if(-1 !== contentIndex){
               mockData.content = mockData.content.replace(eval(reg), newEle);
             }
-            searchedData.unshift(this.mockDataPool[key]);
+            searchedData.unshift(mockDataPoolTemp[key]);
           }
           else {
           }
         }
         console.log(searchedData);
-        this.$set(this.$data, "mockData", searchedData)
+        this.$set(this.$data, "mockData", searchedData);
+        console.log(this.mockDataPool);
       }
     }
   }
