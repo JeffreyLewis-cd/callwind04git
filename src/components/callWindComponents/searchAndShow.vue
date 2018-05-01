@@ -45,6 +45,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapGetters } from 'vuex'
+  import * as MUTATIONS from "../../store/mutations"
+
   export default{
     name: "searchAndShow",
     data(){
@@ -62,12 +65,10 @@
             imgURL: ""
           }
         ],
-        mockDataPool: [],
       }
     },
     mounted: function () {
       this.getMockData();
-      console.log(this.mockDataPool);
     },
     components: {},
     methods: {
@@ -85,13 +86,15 @@
             imgURL: ()=>Random.image(),
           }]
         });
-        this.$set(this.$data, "mockDataPool", randomMockData.tableData);
+        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData)
+        console.log("mutations测试-01");
+        console.log(this.originMockData);
       },
 
       //查询搜索
       searchInMockPool(){
         let searchedData = [];
-        let mockDataPoolTemp=this.mockDataPool;
+        let mockDataPoolTemp=this.originMockData;
 
         for (let key = 0; key < mockDataPoolTemp.length; key++) {
           let mockData = mockDataPoolTemp[key];
@@ -122,10 +125,15 @@
           else {
           }
         }
-        console.log(searchedData);
         this.$set(this.$data, "mockData", searchedData);
-        console.log(this.mockDataPool);
+        console.log(this.originMockData);
+        console.log(mockDataPoolTemp);
       }
+    },
+    computed:{
+      ...mapGetters({
+        originMockData:"originMockData"
+      })
     }
   }
 </script>

@@ -13,6 +13,11 @@ Vue.use(iView);
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
+/*引入状态管理模式*/
+import Vuex from 'vuex'
+Vue.use(Vuex);
+import store from './store'
+
 
 
 Vue.config.productionTip = false;
@@ -21,6 +26,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  store,//使用store
   components: { App },
   template: '<App/>'
-})
+});
