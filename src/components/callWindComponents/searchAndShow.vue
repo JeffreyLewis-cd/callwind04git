@@ -64,6 +64,7 @@
             imgURL: ""
           }
         ],
+        mockDataPool:[],
       }
     },
     mounted: function () {
@@ -74,7 +75,6 @@
     methods: {
       //生成模拟数据
       getMockData(){
-//        console.log("点击搜索-01");
         var Mock = require('mockjs');
         var Random = Mock.Random;
         let randomMockData = Mock.mock({
@@ -86,15 +86,16 @@
             imgURL: ()=>Random.image(),
           }]
         });
-        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData)
-//        console.log("mutations测试-01");
-//        console.log(this.originMockData);
+//        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData);  //使用vuex
+        this.mockDataPool=randomMockData.tableData;
       },
 
       //查询搜索
       searchInMockPool(){
         let searchedData = [];
-        let mockDataPoolTemp=this.originMockData;
+        let mockDataPoolTemp=JSON.parse(JSON.stringify(this.mockDataPool));   //禁止双向绑定
+        console.log(mockDataPoolTemp);
+        console.log(this.mockDataPool);
 
         for (let key = 0; key < mockDataPoolTemp.length; key++) {
           let mockData = mockDataPoolTemp[key];
@@ -126,13 +127,10 @@
           }
         }
         this.$set(this.$data, "mockData", searchedData);
-//        console.log(this.originMockData);
-//        console.log(mockDataPoolTemp);
       },
 
       //回车键搜索
       enterSearch(event){
-//        console.log("键盘事件-01");
         if(13===event.keyCode){
           this.searchInMockPool();//查询搜索
         }
