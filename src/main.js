@@ -13,9 +13,7 @@ Vue.use(iView);
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
-/*引入状态管理模式*/
-import Vuex from 'vuex'
-Vue.use(Vuex);
+/*引入状态管理模式-vuex-store*/
 import store from './store'
 
 

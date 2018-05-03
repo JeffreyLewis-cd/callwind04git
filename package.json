@@ -12,10 +12,12 @@
   "dependencies": {
     "es6-promise": "^4.2.4",
     "iview": "^2.13.1",
+    "lodash": "^4.17.10",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vux": "^2.9.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

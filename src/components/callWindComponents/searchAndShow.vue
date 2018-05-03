@@ -46,6 +46,8 @@
 <script type="text/ecmascript-6">
   import { mapGetters } from 'vuex'
   import * as MUTATIONS from "../../store/mutations"
+  /*使用Lodash.js*/
+  var _ = require('lodash');
 
   export default{
     name: "searchAndShow",
@@ -86,16 +88,22 @@
             imgURL: ()=>Random.image(),
           }]
         });
-//        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData);  //使用vuex
-        this.mockDataPool=randomMockData.tableData;
+        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData);  //使用vuex
+        console.log(this.originMockData);
+//        this.mockDataPool=randomMockData.tableData;
       },
-
       //查询搜索
       searchInMockPool(){
         let searchedData = [];
-        let mockDataPoolTemp=JSON.parse(JSON.stringify(this.mockDataPool));   //禁止双向绑定
+//        let mockDataPoolTemp=JSON.parse(JSON.stringify(this.mockDataPool));   //另外开辟内存区域，存放复制的数据。
+//        let mockDataPoolTemp=JSON.parse(JSON.stringify(this.originMockData));   //深度拷贝-另外开辟内存区域，存放复制的数据。
+//        let mockDataPoolTemp=this.originMockData;   //浅拷贝-
+//        let mockDataPoolTemp=this.originMockData.slice(0);   //深度拷贝-不灵
+//        let mockDataPoolTemp=this.originMockData.concat();   //深度拷贝-不灵
+        let mockDataPoolTemp=_.cloneDeep(this.originMockData);   //深度拷贝-必须灵
+        console.log("测试vuex-data-01");
         console.log(mockDataPoolTemp);
-        console.log(this.mockDataPool);
+        console.log(this.originMockData);
 
         for (let key = 0; key < mockDataPoolTemp.length; key++) {
           let mockData = mockDataPoolTemp[key];
