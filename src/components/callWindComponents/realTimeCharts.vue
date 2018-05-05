@@ -54,39 +54,43 @@
       /* 绘制柱状图*/
       drawBar(id){
         // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById(id));
-        // 绘制图表
-        myChart.setOption({
-          title: {
-            text: '网络在线用户数量',
-            subtext: '数据来自网络'
-          },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'shadow'
-            }
-          },
-          legend: {
-            right:10,
-            data: [this.seriesData[0].name, this.seriesData[1].name]
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          xAxis: {
-            type: 'value',
-            boundaryGap: [0, 0.01]
-          },
-          yAxis: {
-            type: 'category',
-            data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
-          },
-          series: this.seriesData,
-        });
+        let chartBox=document.getElementById(id);
+        if(chartBox){
+          let myChart = this.$echarts.init(chartBox);
+          // 绘制图表
+          myChart.setOption({
+            title: {
+              text: '网络在线用户数量',
+              subtext: '数据来自网络'
+            },
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                type: 'shadow'
+              }
+            },
+            legend: {
+              right:10,
+              data: [this.seriesData[0].name, this.seriesData[1].name]
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: {
+              type: 'value',
+              boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+              type: 'category',
+              data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
+            },
+            series: this.seriesData,
+          });
+        }
+
       }
     }
   }

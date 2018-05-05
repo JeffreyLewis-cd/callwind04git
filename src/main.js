@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-/*框架使用*/
+/*框架使用-iView*/
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 Vue.use(iView);
@@ -16,6 +16,10 @@ Vue.prototype.$echarts = echarts;
 /*引入状态管理模式-vuex-store*/
 import store from './store'
 
+/*框架使用-Element*/
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 
 
 Vue.config.productionTip = false;

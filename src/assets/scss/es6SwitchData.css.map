@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,iBAAiB;AACjB,cAAc;EACZ,OAAO,EAAC,IAAI;EACZ,kCAAmB;IACjB,MAAM,EAAC,IAAI;IACX,KAAK,EAAC,IAAI;IACV,OAAO,EAAE,IAAI;IACb,eAAe,EAAC,UAAU;IAC1B,aAAa,EAAE,IAAI;IAEjB,mEAAe;MACb,WAAW,EAAE,IAAI;EAMrB,8DAAsB;IACpB,KAAK,EAAC,GAAG",
+"sources": ["es6SwitchData.scss"],
+"names": [],
+"file": "es6SwitchData.css"
+}

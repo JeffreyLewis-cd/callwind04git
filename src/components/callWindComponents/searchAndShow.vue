@@ -14,9 +14,18 @@
 
     <!--查询结果列表项数目-->
     <div class="seAndSh-filterInFront">
-      <span>查询到&nbsp; </span>
-      <span>{{mockData.length}}</span>
-      <span> &nbsp;条数据</span>
+      <div>
+        <span>查询到&nbsp; </span>
+        <span>{{mockData.length}}</span>
+        <span> &nbsp;条数据</span>
+      </div>
+
+      <router-link to="/es6SwitchData">
+        <el-button type="primary" size="small" plain>
+          ES6语法切换数据
+        </el-button>
+      </router-link>
+
     </div>
 
     <!-- 展示数据列表-->
@@ -66,7 +75,7 @@
             imgURL: ""
           }
         ],
-        mockDataPool:[],
+        mockDataPool: [],
       }
     },
     mounted: function () {
@@ -88,7 +97,7 @@
             imgURL: ()=>Random.image(),
           }]
         });
-        this.$store.commit(MUTATIONS.originMockDataUpdate,randomMockData.tableData);  //使用vuex
+        this.$store.commit(MUTATIONS.originMockDataUpdate, randomMockData.tableData);  //使用vuex
         console.log(this.originMockData);
 //        this.mockDataPool=randomMockData.tableData;
       },
@@ -100,7 +109,7 @@
 //        let mockDataPoolTemp=this.originMockData;   //浅拷贝-
 //        let mockDataPoolTemp=this.originMockData.slice(0);   //深度拷贝-不灵
 //        let mockDataPoolTemp=this.originMockData.concat();   //深度拷贝-不灵
-        let mockDataPoolTemp=_.cloneDeep(this.originMockData);   //深度拷贝-必须灵
+        let mockDataPoolTemp = _.cloneDeep(this.originMockData);   //深度拷贝-必须灵
         console.log("测试vuex-data-01");
         console.log(mockDataPoolTemp);
         console.log(this.originMockData);
@@ -112,7 +121,7 @@
           let dateIndex = mockData.date.indexOf(this.searchVal);
           let contentIndex = mockData.content.indexOf(this.searchVal);
 
-          let matchResult = (-1 !== nameIndex) ||   (-1 !== addressIndex) ||    (-1 !== dateIndex) ||    (-1 !== contentIndex);
+          let matchResult = (-1 !== nameIndex) || (-1 !== addressIndex) || (-1 !== dateIndex) || (-1 !== contentIndex);
           if (matchResult) {
             /*关键字高亮显示*/
             let newEle = "<span style='color:#fff;background-color:red'>" + this.searchVal + "</span>";
@@ -120,13 +129,13 @@
             if (-1 !== nameIndex) {
               mockData.name = mockData.name.replace(eval(reg), newEle);
             }
-            else if(-1 !== addressIndex){
+            else if (-1 !== addressIndex) {
               mockData.address = mockData.address.replace(eval(reg), newEle);
             }
-            else if(-1 !== dateIndex){
+            else if (-1 !== dateIndex) {
               mockData.date = mockData.date.replace(eval(reg), newEle);
             }
-            else if(-1 !== contentIndex){
+            else if (-1 !== contentIndex) {
               mockData.content = mockData.content.replace(eval(reg), newEle);
             }
             searchedData.unshift(mockDataPoolTemp[key]);
@@ -139,14 +148,14 @@
 
       //回车键搜索
       enterSearch(event){
-        if(13===event.keyCode){
+        if (13 === event.keyCode) {
           this.searchInMockPool();//查询搜索
         }
       }
     },
-    computed:{
+    computed: {
       ...mapGetters({
-        originMockData:"originMockData"
+        originMockData: "originMockData"
       })
     }
   }

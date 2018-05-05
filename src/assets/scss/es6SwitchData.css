@@ -1,0 +1,15 @@
+/*es6SwitchData*/
+.es6SwitchData {
+  padding: 10px; }
+  .es6SwitchData .es6SwitchData-btns {
+    height: 32px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px; }
+    .es6SwitchData .es6SwitchData-btns .switchData-btns .switchData-btn {
+      margin-left: 10px; }
+  .es6SwitchData .es6SwitchData-tableData .es6SD-tableData-table {
+    width: 70%; }
+
+/*# sourceMappingURL=es6SwitchData.css.map */
