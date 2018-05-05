@@ -26,9 +26,10 @@
           border
           stripe
           style="width: 100%">
-          <el-table-column v-for="(titleItem,index) in dataSource[active_index].dataTile" :key="index"
+          <el-table-column v-for="(titleItem,index) in dataSource[active_index].dataTitle" :key="index"
                            :prop="titleItem.field"
                            :label="titleItem.label"
+                           :formatter="stringFuncNameToRealFunc(titleItem.formatter)"
                            align="center">
           </el-table-column>
 
@@ -57,7 +58,7 @@
         msg: 'hello vue',
         dataSource: [
           {
-            dataTile: [
+            dataTitle: [
               {
                 field: "date",
                 label: "日期"
@@ -117,7 +118,7 @@
             ]
           },
           {
-            dataTile: [
+            dataTitle: [
               {
                 field: "date",
                 label: "日期"
@@ -128,7 +129,24 @@
               },
               {
                 field: "orderState",
-                label: "订单状态"
+                label: "订单状态",
+                formatter:"pubStateToTxt",
+                stateMap:{
+                  0:"未付款",
+                  1:"收到货款-准备出库",
+                  2:"物流运输中-圆通快递",
+                  3:"到达客户附近-快递员配送中",
+                }
+              },
+              {
+                field: "goodsLevel",
+                label: "商品等级",
+                formatter:"pubStateToTxt",
+                stateMap:{
+                  0:"优等品",
+                  1:"中级品",
+                  2:"一般商品",
+                }
               },
               {
                 field: "length",
@@ -160,7 +178,8 @@
               {
                 date: '2017-05-03',
                 name: '立柜',
-                orderState: '未付款',
+                orderState: 2,
+                goodsLevel:1,
                 length: '120',
                 width: '60',
                 height: '150',
@@ -171,7 +190,8 @@
               {
                 date: '2017-08-03',
                 name: '沙发',
-                orderState: '已发货-圆通快递',
+                orderState: 0,
+                goodsLevel:2,
                 length: '230',
                 width: '130',
                 height: '60',
@@ -182,7 +202,7 @@
             ]
           },
         ],
-        selectedData_index: 0,
+        selectedData_index: 1,
         dataSource_btns: [
           {
             label: "演员数据"
@@ -214,8 +234,29 @@
       },
 
       /*接收后台传来的映射关系--把状态字转换成汉字*/
-      mapFormatter(){
-        
+      pubStateToTxt(row, column, cellValue, index){
+        let oriState=cellValue;
+        let formatField=column.property;
+        let activeData=this.dataSource[this.active_index].dataTitle;
+
+        let formatItem=activeData.find(item=>{
+          if(item.field==formatField)
+          return item;
+        });
+        let oStateMap=formatItem.stateMap;
+
+        for(let key in oStateMap){
+          if(key==oriState){
+            oriState=oStateMap[key];
+          }
+        }
+        return oriState;
+      },
+
+      /*把字符串函数名转换成可执行的函数*/
+      stringFuncNameToRealFunc(name){
+        let realFunc=eval('this.'+name);
+        return realFunc;
       }
     }
   }
