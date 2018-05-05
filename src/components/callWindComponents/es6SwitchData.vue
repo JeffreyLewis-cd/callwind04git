@@ -20,28 +20,28 @@
     </div>
     <div class="es6SwitchData-tableData">
       <div class="es6SD-tableData-table">
-        <h2>{{dataSource_switch}}</h2>
-      <el-table
-        :data="dataSource[selectedData_index].dataContent"
-        border
-        stripe
-        style="width: 100%">
-        <el-table-column v-for="(titleItem,index) in dataSource[selectedData_index].dataTile" :key="index"
-                         :prop="titleItem.field"
-                         :label="titleItem.label"
-                         align="center"     >
-        </el-table-column>
+        <h2>{{active_index}}</h2>
+        <el-table
+          :data="dataSource[active_index].dataContent"
+          border
+          stripe
+          style="width: 100%">
+          <el-table-column v-for="(titleItem,index) in dataSource[active_index].dataTile" :key="index"
+                           :prop="titleItem.field"
+                           :label="titleItem.label"
+                           align="center">
+          </el-table-column>
 
-        <el-table-column
-          fixed="right"
-          label="操作"
-          width="100">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+              <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+              <el-button type="text" size="small">编辑</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
 
     </div>
@@ -160,50 +160,49 @@
               {
                 date: '2017-05-03',
                 name: '立柜',
-                orderState:'未付款',
-                length:'120',
-                width:'60',
-                height:'150',
-                weight:'66',
-                volume:'145',
-                remark:'无',
+                orderState: '未付款',
+                length: '120',
+                width: '60',
+                height: '150',
+                weight: '66',
+                volume: '145',
+                remark: '无',
               },
               {
                 date: '2017-08-03',
                 name: '沙发',
-                orderState:'已发货-圆通快递',
-                length:'230',
-                width:'130',
-                height:'60',
-                weight:'150',
-                volume:'256',
-                remark:'加急',
+                orderState: '已发货-圆通快递',
+                length: '230',
+                width: '130',
+                height: '60',
+                weight: '150',
+                volume: '256',
+                remark: '加急',
               },
             ]
           },
         ],
-        selectedData_index:0,
-        dataSource_btns:[
+        selectedData_index: 0,
+        dataSource_btns: [
           {
-            label:"演员数据"
+            label: "演员数据"
           },
           {
-            label:"商品数据"
+            label: "商品数据"
           },
         ]
       }
     },
-    computed:{
-      dataSource_switch(){
-        return (this.selectedData_index)?this.selectedData_index:null;
+    computed: {
+      active_index(){
+        return (this.selectedData_index) ? this.selectedData_index : 0;
       }
     },
     mounted: function () {
-
     },
     components: {},
     methods: {
-     /* 返回查询页面*/
+      /* 返回查询页面*/
       backToSearchAndShow(){
 //            this.$router.go(-1);
         this.$router.push({name: "callWindMainPage"})
@@ -211,7 +210,12 @@
 
       /*切换源数据*/
       switchData(index){
-        this.selectedData_index=index;
+        this.selectedData_index = index;
+      },
+
+      /*接收后台传来的映射关系--把状态字转换成汉字*/
+      mapFormatter(){
+        
       }
     }
   }
